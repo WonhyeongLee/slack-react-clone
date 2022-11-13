@@ -6,12 +6,12 @@ const SignUp: React.FC = () => {
   const [signUpError, setSignUpError] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
   const [mismatchError, setMismatchError] = useState(false);
-  // --------useInput 훅으로 중복제거할 것들-------
+
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
-  // ----------------
+
   const onSubmit = useCallback(() => {
     console.log(email, nickname, password, passwordCheck);
     if (!mismatchError && nickname) {
