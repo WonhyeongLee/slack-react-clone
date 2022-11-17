@@ -42,4 +42,5 @@
 ## 진행기록
 
 11/11 : MAC환경에서 back(MySQL), front(eslint, webpack, babel, preittier) 기본 셋팅 후 폴더 생성<br>
-11/12 : 코드스플리팅, react-router v6 에 맞춰서 바뀐 부분 수정, 회원가입부분구현 & 중복부분 useInput 훅으로 빼기, axios proxy설정
+11/12 : 코드스플리팅, react-router v6 에 맞춰서 바뀐 부분 수정, 회원가입부분구현 & 중복부분 useInput 훅으로 빼기, axios proxy설정<br>
+11/18 : 회원가입기능 구현, 로그인과 회원가입은 axios만 사용하고 관리는 react-query를 사용하려고 했는데 회원가입 부분도 react-query를 사용해서 교체 해봐야 겠다. 전체적인 구조를 생각해서 그려봐야 할 필요성을 느낌
