@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "esModuleInterop": true, //import * as 부분 생략 가능하게 해줌
     "sourceMap": true,
+    "noImplicitAny": false,
     "lib": ["ES2020", "DOM"],
     "jsx": "react", //jsx확장자는 이 프로젝트에선 react 로만 사용하겠다고 미리 정의
     "module": "esnext",
     "moduleResolution": "Node", //import export을 노드도 해석가능하게 하겠다
     "target": "es5",
+    "typeRoots": ["node_modules/@types"],
     "strict": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
@@ -17,7 +20,8 @@
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
       "@typings/*": ["types/*"]
-    }
+    },
+    "outDir": ".dist"
   },
   // webpack이 ts를 돌릴 때 사용하는 모듈 (공홈참조)
   "ts-node": {
