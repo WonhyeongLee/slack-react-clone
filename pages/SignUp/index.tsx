@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import axios from 'axios';
 import useInput from '@hooks/useInput';
+import { useAuth } from '../../auth/useAuth';
 import { Form, Label, Input, LinkContainer, Button, Header, Error, Success } from './style';
 const SignUp: React.FC = () => {
   const [signUpError, setSignUpError] = useState(false);
@@ -11,13 +12,19 @@ const SignUp: React.FC = () => {
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
+  const auth = useAuth();
 
-  const onSubmit = useCallback(() => {
-    console.log(email, nickname, password, passwordCheck);
-    if (!mismatchError && nickname) {
-      console.log('서버로 회원가입하기');
-    }
-  }, [email, password, nickname, passwordCheck]);
+  const onSubmit = useCallback(
+    (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      console.log(email, nickname, password, passwordCheck);
+      auth.signup(email, nickname, password);
+      if (!mismatchError && nickname) {
+        console.log('서버로 회원가입하기');
+      }
+    },
+    [email, password, nickname, passwordCheck],
+  );
 
   const onChangePassword = useCallback(
     (e: any) => {
