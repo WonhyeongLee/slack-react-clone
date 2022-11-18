@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import axios from 'axios';
 import useInput from '@hooks/useInput';
 import { useAuth } from '../../auth/useAuth';
 import { Form, Label, Input, LinkContainer, Button, Header, Error, Success } from './style';
-const SignUp: React.FC = () => {
+
+export default function SignUp(): ReactElement {
   const [signUpError, setSignUpError] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
   const [mismatchError, setMismatchError] = useState(false);
@@ -86,6 +87,4 @@ const SignUp: React.FC = () => {
       </LinkContainer>
     </div>
   );
-};
-
-export default SignUp;
+}
