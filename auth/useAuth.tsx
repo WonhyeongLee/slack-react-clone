@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import axios, { AxiosResponse } from 'axios';
 import { axiosInstance } from '../axiosInstance/index';
 import { User } from '../types/types';
@@ -13,6 +14,7 @@ type ErrorResponse = { message: string };
 type AuthResponseType = UserResponse | ErrorResponse;
 
 export function useAuth(): UseAuth {
+  const toast = useToast();
   async function authServerCall(
     urlEndpoint: string,
     email: string,
@@ -33,6 +35,13 @@ export function useAuth(): UseAuth {
       }
       if (status === 201) {
         console.log(`가입 성공 `);
+        toast({
+          isClosable: true,
+          title: `회원가입 되었습니다. 로그인해주세요 !`,
+          status: 'info',
+          variant: 'subtle',
+          position: 'top',
+        });
       }
       console.log(data);
     } catch (errorResponse) {
