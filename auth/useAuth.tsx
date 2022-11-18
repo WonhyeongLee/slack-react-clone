@@ -29,10 +29,6 @@ export function useAuth(): UseAuth {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (status === 400) {
-        console.log('인증실패');
-        return;
-      }
       if (status === 201) {
         console.log(`가입 성공 `);
         toast({
@@ -47,6 +43,17 @@ export function useAuth(): UseAuth {
     } catch (errorResponse) {
       // 에러처리
       console.log(errorResponse);
+      const title =
+        axios.isAxiosError(errorResponse) && errorResponse?.response?.data
+          ? errorResponse?.response?.data
+          : '서버와 연결이 안됩니다.';
+      toast({
+        isClosable: true,
+        title: title,
+        status: 'error',
+        variant: 'subtle',
+        position: 'top',
+      });
     }
   }
   async function signin(email: string, password: string): Promise<void> {

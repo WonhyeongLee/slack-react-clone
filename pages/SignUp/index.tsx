@@ -1,14 +1,10 @@
 import React, { ReactElement, useCallback, useState } from 'react';
-import axios from 'axios';
 import useInput from '@hooks/useInput';
 import { useAuth } from '../../auth/useAuth';
 import { Form, Label, Input, LinkContainer, Button, Header, Error, Success } from './style';
 
 export default function SignUp(): ReactElement {
-  const [signUpError, setSignUpError] = useState(false);
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
   const [mismatchError, setMismatchError] = useState(false);
-
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
@@ -76,8 +72,6 @@ export default function SignUp(): ReactElement {
           </div>
           {mismatchError && <Error>비밀번호가 일치하지 않습니다.</Error>}
           {!nickname && <Error>닉네임을 입력해주세요.</Error>}
-          {signUpError && <Error>이미 가입된 이메일입니다.</Error>}
-          {signUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>}
         </Label>
         <Button type="submit">회원가입</Button>
       </Form>
