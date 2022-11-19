@@ -1,8 +1,10 @@
+export interface Id{
+  id: number;
+}
 export interface NewUser {
   email: string;
   nickname?: string;
   password?: string;
-  token?: string;
 }
 
-export type User = NewUser;
+export type User = Id & NewUser;
