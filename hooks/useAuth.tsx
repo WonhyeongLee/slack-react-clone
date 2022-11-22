@@ -1,5 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import axios, { AxiosResponse } from 'axios';
+import { useCallback } from 'react';
 import { axiosInstance } from '../axiosInstance/index';
 import { User } from '../types/types';
 import { useUser } from './useUser';
@@ -17,9 +18,9 @@ export function useAuth(): UseAuth {
   const { updateUser, clearUser } = useUser();
   async function authServerCall(
     urlEndpoint: string,
-    email: string,
-    nickname: string | undefined,
-    password: string,
+    email?: string,
+    nickname?: string,
+    password?: string,
   ): Promise<void> {
     try {
       const { data, status }: AxiosResponse<AuthResponseType> =
@@ -80,9 +81,12 @@ export function useAuth(): UseAuth {
 
     authServerCall('/api/users', email, nickname, password);
   }
-  function signout(): void {
-    //todo: 로그인user정보를 정리해주는(삭제) 함수 clearUser() 작성
-  }
+  const signout = useCallback(() => {
+    console.log('signout');
+    authServerCall('api/users/logout');
+    clearUser();
+  }, []);
+
   return {
     signin,
     signup,
