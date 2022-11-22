@@ -14,8 +14,6 @@ import { Link } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
 
 const LogIn = () => {
-  //user 확인 useQuery
-  const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
   const auth = useAuth();
@@ -67,9 +65,6 @@ const LogIn = () => {
               onChange={onChangePassword}
             />
           </div>
-          {logInError && (
-            <Error>이메일과 비밀번호 조합이 일치하지 않습니다.</Error>
-          )}
         </Label>
         <Button type="submit">로그인</Button>
       </Form>
