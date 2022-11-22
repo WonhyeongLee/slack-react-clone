@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const LogIn = loadable(() => import('@pages/Login'));
 const SignUp = loadable(() => import('@pages/SignUp'));
+const Channel = loadable(() => import('@pages/Channel'));
 
 // 코드스플리팅 할 때 어떤부분을 하면 좋을지 생각해보자
 // 가장쉬운단위 : 페이지들 , 서버에서 렌더링 안된 컴포넌트들
@@ -19,6 +20,7 @@ export default function App(): ReactElement {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/workspace/channel" element={<Channel />} />
         </Routes>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
