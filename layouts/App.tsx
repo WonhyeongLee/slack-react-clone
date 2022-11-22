@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChakraProvider } from '@chakra-ui/react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const LogIn = loadable(() => import('@pages/Login'));
 const SignUp = loadable(() => import('@pages/SignUp'));
 
@@ -19,6 +20,7 @@ export default function App(): ReactElement {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>
   );
