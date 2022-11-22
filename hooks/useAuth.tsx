@@ -42,14 +42,18 @@ export function useAuth(): UseAuth {
       }
       //로그인성공 시
       if ('email' in data) {
-        const user = { ...data };
-        // 헷갈렸던 부분, data도 객체였는데 구조분해를 안했다..
-        console.log(user);
-        updateUser(user);
+        const userData: any = {};
+        userData.user = { ...data };
+
+        console.log(userData);
+        updateUser(userData);
       }
     } catch (errorResponse) {
       // 에러처리
+      console.log('errorResponse log --------------');
       console.log(errorResponse);
+      console.log('--------------------------------');
+
       const title =
         axios.isAxiosError(errorResponse) && errorResponse?.response?.data
           ? errorResponse?.response?.data
