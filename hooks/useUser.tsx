@@ -24,6 +24,7 @@ async function getUser(
       signal,
     },
   );
+  console.log(data);
 
   return data.user;
 }
@@ -41,6 +42,8 @@ export function useUser(): UseUser {
     {
       initialData: getStoredUser,
       onSuccess: (received: null | User) => {
+        console.log(received);
+
         if (!received) {
           console.log('clear');
 
@@ -55,9 +58,11 @@ export function useUser(): UseUser {
   function updateUser(newUser: User): void {
     console.log(newUser);
     queryClient.setQueryData([queryKeys.user], newUser);
+    setStoredUser(newUser);
   }
   function clearUser() {
     queryClient.setQueryData([queryKeys.user], null);
+    clearStoredUser();
   }
   return { user, updateUser, clearUser };
 }
