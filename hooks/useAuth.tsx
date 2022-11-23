@@ -45,7 +45,6 @@ export function useAuth(): UseAuth {
       if ('email' in data) {
         const userData: any = {};
         userData.user = { ...data };
-
         console.log(userData);
         updateUser(userData);
       }
@@ -83,7 +82,7 @@ export function useAuth(): UseAuth {
   }
   const signout = useCallback(() => {
     console.log('signout');
-    authServerCall('api/users/logout');
+    // authServerCall('api/users/logout');
     clearUser();
   }, []);
 
