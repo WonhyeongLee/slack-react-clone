@@ -10,7 +10,7 @@ import {
 } from '@pages/SignUp/style';
 import { useAuth } from '@hooks/useAuth';
 import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
 
 const LogIn = () => {
@@ -18,11 +18,8 @@ const LogIn = () => {
   const [password, onChangePassword] = useInput('');
   const auth = useAuth();
   const { user } = useUser();
-  if (user) {
-    console.log('----login된 상태입니다.----');
-    console.log(user);
-    console.log('---------------------------');
-  }
+  const navigate = useNavigate();
+
   const onSubmit = useCallback(
     (e: { preventDefault: () => void }) => {
       e.preventDefault();
@@ -32,14 +29,16 @@ const LogIn = () => {
     [email, password],
   );
 
-  // console.log(error, userData);
-  // if (!error && userData) {
-  //   console.log('로그인됨', userData);
-  //   return <Redirect to="/workspace/sleact/channel/일반" />;
-  // }
+  if (user) {
+    console.log('----login된 상태입니다.----');
+    console.log(user);
+    console.log('---------------------------');
+    return <Navigate to="/workspace/channel" />;
+  }
 
   return (
     <div id="container">
+      {/* {user && <Navigate to="/workspace/channel" />} */}
       <Header>Sleact</Header>
       <Form onSubmit={onSubmit}>
         <Label id="email-label">
