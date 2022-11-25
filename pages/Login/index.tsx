@@ -10,15 +10,14 @@ import {
 } from '@pages/SignUp/style';
 import { useAuth } from '@hooks/useAuth';
 import React, { useCallback, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useUser } from '@hooks/useUser';
 
 const LogIn = () => {
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
   const auth = useAuth();
-  const { user } = useUser();
-  const navigate = useNavigate();
+  const { user, isFetching } = useUser();
 
   const onSubmit = useCallback(
     (e: { preventDefault: () => void }) => {
@@ -29,10 +28,11 @@ const LogIn = () => {
     [email, password],
   );
 
+  // isFetching : 캐시에 데이터가 있던말던 데이터를 가져오고 있을 때는 true를 반환함을 이용해서 login->workspace로 이동하는 사이에 로딩중 구현
+  if (isFetching) {
+    return <div>Loading ......</div>;
+  }
   if (user) {
-    console.log('----login된 상태입니다.----');
-    console.log(user);
-    console.log('---------------------------');
     return <Navigate to="/workspace/channel" />;
   }
 
