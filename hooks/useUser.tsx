@@ -30,12 +30,13 @@ async function getUser(
 
 interface UseUser {
   user: User | null;
+  isFetching: boolean;
   updateUser: (user: User) => void;
   clearUser: () => void;
 }
 export function useUser(): UseUser {
   const queryClient = useQueryClient();
-  const { data: user } = useQuery<User>(
+  const { data: user, isFetching: isFetching } = useQuery<User>(
     [queryKeys.user],
     ({ signal }) => getUser(user, signal),
     {
@@ -63,5 +64,5 @@ export function useUser(): UseUser {
     queryClient.setQueryData([queryKeys.user], null);
     clearStoredUser();
   }
-  return { user, updateUser, clearUser };
+  return { user, updateUser, clearUser, isFetching };
 }
